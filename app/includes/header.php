@@ -36,7 +36,7 @@ $current_dir = basename(dirname($_SERVER['PHP_SELF']));
     <!-- CSS Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link href="<?= $base_url ?>/app/assets/css/style.css" rel="stylesheet">
+    <link href="<?= $base_url ?>/app/assets/css/style.css?v=<?= time() ?>" rel="stylesheet">
 </head>
 <body>
      <div class="app-container">
@@ -119,7 +119,7 @@ $current_dir = basename(dirname($_SERVER['PHP_SELF']));
                         <span class="user-role">Administrator</span>
                     </div>
                 </div>
-                <a href="<?= $base_url ?>/app/auth/logout.php" class="logout-btn" title="Logout">
+                <a href="<?= $base_url ?>/app/auth/logout.php" class="logout-btn" title="Logout" onclick="return confirm('Yakin ingin logout?')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
                     </svg>

@@ -11,7 +11,10 @@ $filter_jenis = $_GET['jenis'] ?? '';
 $filter_dari = $_GET['dari'] ?? date('Y-m-01');
 $filter_sampai = $_GET['sampai'] ?? date('Y-m-d');
 
-$sql = "SELECT t.*, b.nama_barang FROM transaksi t JOIN barang b ON t.id_barang = b.id WHERE DATE(t.tanggal_transaksi) BETWEEN ? AND ?";
+$sql = "SELECT t.*, b.nama_barang 
+        FROM transaksi t 
+        JOIN barang b ON t.id_barang = b.id 
+        WHERE DATE(t.tanggal_transaksi) BETWEEN ? AND ?";
 $params = [$filter_dari, $filter_sampai];
 
 if ($filter_jenis) {
@@ -71,27 +74,27 @@ foreach ($data_transaksi as $t) {
 <!-- Summary -->
 <div class="row g-3 mb-4">
     <div class="col-md-4">
-        <div class="card" style="background: #dcfce7;">
+        <div class="card" style="background:#dcfce7">
             <div class="card-body text-center">
-                <h6 style="color: #15803d;">Total Masuk</h6>
-                <h3 style="color: #15803d;">+<?= number_format($total_masuk) ?></h3>
+                <h6>Total Masuk</h6>
+                <h3 class="text-success">+<?= number_format($total_masuk) ?></h3>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card" style="background: #fee2e2;">
+        <div class="card" style="background:#fee2e2">
             <div class="card-body text-center">
-                <h6 style="color: #dc2626;">Total Keluar</h6>
-                <h3 style="color: #dc2626;">-<?= number_format($total_keluar) ?></h3>
+                <h6>Total Keluar</h6>
+                <h3 class="text-danger">-<?= number_format($total_keluar) ?></h3>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card" style="background: #eff6ff;">
+        <div class="card" style="background:#eff6ff">
             <div class="card-body text-center">
-                <h6 style="color: #3b82f6;">Selisih</h6>
-                <h3 style="color: <?= ($total_masuk - $total_keluar) >= 0 ? '#15803d' : '#dc2626' ?>;">
-                    <?= ($total_masuk - $total_keluar) >= 0 ? '+' : '' ?><?= number_format($total_masuk - $total_keluar) ?>
+                <h6>Selisih</h6>
+                <h3>
+                    <?= number_format($total_masuk - $total_keluar) ?>
                 </h3>
             </div>
         </div>
@@ -100,73 +103,81 @@ foreach ($data_transaksi as $t) {
 
 <!-- Table -->
 <div class="card">
-    <div class="card-header">
-        <span>Data Transaksi (<?= count($data_transaksi) ?> records)</span>
-    </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table id="tabelTransaksi" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th width="5%">No</th>
-                        <th width="18%">Tanggal</th>
-                        <th>Barang</th>
-                        <th width="12%">Jenis</th>
-                        <th width="10%">Jumlah</th>
-                        <th>Keterangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($data_transaksi)): ?>
-                        <tr><td colspan="6" class="text-center text-muted py-4">Tidak ada data</td></tr>
-                    <?php else: ?>
-                        <?php $no = 1; foreach ($data_transaksi as $t): ?>
-                        <tr>
-                            <td><?= $no++ ?></td>
-                            <td><?= date('d/m/Y H:i', strtotime($t['tanggal_transaksi'])) ?></td>
-                            <td><strong><?= htmlspecialchars($t['nama_barang']) ?></strong></td>
-                            <td>
-                                <span class="badge <?= $t['jenis_transaksi'] === 'masuk' ? 'bg-success' : 'bg-danger' ?>">
-                                    <?= ucfirst($t['jenis_transaksi']) ?>
-                                </span>
-                            </td>
-                            <td class="<?= $t['jenis_transaksi'] === 'masuk' ? 'text-success' : 'text-danger' ?> fw-bold">
-                                <?= $t['jenis_transaksi'] === 'masuk' ? '+' : '-' ?><?= $t['jumlah'] ?>
-                            </td>
-                            <td><small class="text-muted"><?= htmlspecialchars($t['keterangan'] ?: '-') ?></small></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+        <table id="tabelTransaksi" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Barang</th>
+                    <th>Jenis</th>
+                    <th>Jumlah</th>
+                    <th>Keterangan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $no=1; foreach($data_transaksi as $t): ?>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= date('d/m/Y H:i', strtotime($t['tanggal_transaksi'])) ?></td>
+                    <td><?= htmlspecialchars($t['nama_barang']) ?></td>
+                    <td><?= ucfirst($t['jenis_transaksi']) ?></td>
+                    <td><?= $t['jumlah'] ?></td>
+                    <td><?= htmlspecialchars($t['keterangan'] ?: '-') ?></td>
+                    <td>
+                        <button class="btn btn-sm btn-info"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalDetail"
+                            data-nama="<?= htmlspecialchars($t['nama_barang']) ?>"
+                            data-tanggal="<?= date('d/m/Y H:i', strtotime($t['tanggal_transaksi'])) ?>"
+                            data-jenis="<?= ucfirst($t['jenis_transaksi']) ?>"
+                            data-jumlah="<?= $t['jumlah'] ?>"
+                            data-keterangan="<?= htmlspecialchars($t['keterangan'] ?: '-') ?>">
+                            Detail
+                        </button>
+                    </td>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
 
-<!-- DataTables Init - HARUS setelah footer karena jQuery & DataTables dimuat di footer -->
+<!-- MODAL DETAIL -->
+<div class="modal fade" id="modalDetail" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail Transaksi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-sm">
+          <tr><th>Nama Barang</th><td id="dNama"></td></tr>
+          <tr><th>Tanggal</th><td id="dTanggal"></td></tr>
+          <tr><th>Jenis</th><td id="dJenis"></td></tr>
+          <tr><th>Jumlah</th><td id="dJumlah"></td></tr>
+          <tr><th>Keterangan</th><td id="dKeterangan"></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 $(document).ready(function() {
-    $('#tabelTransaksi').DataTable({
-        language: { 
-            url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ data",
-            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-            paginate: {
-                first: "Pertama",
-                last: "Terakhir",
-                next: "Selanjutnya",
-                previous: "Sebelumnya"
-            }
-        },
-        order: [[1, 'desc']],
-        pageLength: 10,
-        lengthMenu: [[5, 10, 25], [5, 10, 25]],
-        searching: true,
-        paging: true,
-        info: true
+    $('#tabelTransaksi').DataTable();
+
+    $('#modalDetail').on('show.bs.modal', function (event) {
+        let btn = $(event.relatedTarget);
+        $('#dNama').text(btn.data('nama'));
+        $('#dTanggal').text(btn.data('tanggal'));
+        $('#dJenis').text(btn.data('jenis'));
+        $('#dJumlah').text(btn.data('jumlah'));
+        $('#dKeterangan').text(btn.data('keterangan'));
     });
 });
 </script>

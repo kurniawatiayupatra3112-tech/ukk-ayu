@@ -25,9 +25,19 @@ if ($id <= 0) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM barang WHERE id = ?");
+// Ambil data barang dengan join kategori
+$stmt = $pdo->prepare("
+    SELECT b.*, k.nama_kategori
+    FROM barang b
+    LEFT JOIN kategori k ON b.id_kategori = k.id
+    WHERE b.id = ?
+");
 $stmt->execute([$id]);
 $barang = $stmt->fetch();
+
+// Ambil daftar kategori untuk dropdown
+$stmtKategori = $pdo->query("SELECT id, nama_kategori FROM kategori ORDER BY nama_kategori ASC");
+$kategoriList = $stmtKategori->fetchAll();
 
 if (!$barang) {
     $_SESSION['flash_message'] = 'Barang tidak ditemukan!';
@@ -89,6 +99,27 @@ require_once __DIR__ . '/../includes/header.php';
                                value="<?= htmlspecialchars($barang['nama_barang']) ?>"
                                required autofocus>
                     </div>
+
+                    <div class="mb-3">
+    <label class="form-label">Kategori <span class="text-danger">*</span></label>
+    <select name="id_kategori" class="form-control" required>
+        <option value="">-- Pilih Kategori --</option>
+        <?php foreach ($kategoriList as $k): ?>
+            <option value="<?= $k['id'] ?>"
+                <?= ($barang['id_kategori'] == $k['id']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($k['nama_kategori']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Satuan <span class="text-danger">*</span></label>
+    <input type="text" name="satuan" class="form-control"
+           value="<?= htmlspecialchars($barang['satuan'] ?? '') ?>"
+           placeholder="Contoh: pcs, unit, box" required>
+</div>
+
                     
                     <div class="mb-3">
                         <label class="form-label">Stok</label>

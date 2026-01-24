@@ -7,7 +7,14 @@ $page_title = 'Data Barang';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../config/koneksi.php';
 
-$stmt = $pdo->query("SELECT * FROM barang ORDER BY id DESC");
+$stmt = $pdo->query("
+    SELECT 
+        b.*,
+        k.nama_kategori
+    FROM barang b
+    LEFT JOIN kategori k ON b.id_kategori = k.id
+    ORDER BY b.id DESC
+");
 $data_barang = $stmt->fetchAll();
 
 // Hitung total nilai
@@ -91,54 +98,85 @@ foreach ($data_barang as $b) {
                     <tr>
                         <th width="5%">No</th>
                         <th>Nama Barang</th>
+                        <th>Kategori</th>
+                        <th>Satuan</th>
                         <th width="12%">Stok</th>
                         <th width="18%">Harga</th>
+                        <!-- <th width="18%">Status</th> -->
                         <th width="15%">Terakhir Update</th>
                         <th width="12%">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php $no = 1; foreach ($data_barang as $barang): ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><strong><?= htmlspecialchars($barang['nama_barang']) ?></strong></td>
-                        <td>
-                            <?php
-                                $stok = $barang['stok'];
-                                if ($stok > 10) {
-                                    $badge = 'success';
-                                } elseif ($stok > 0) {
-                                    $badge = 'warning';
-                                } else {
-                                    $badge = 'danger';
-                                }
-                            ?>
-                            <span class="badge bg-<?= $badge ?>"><?= $stok ?></span>
-                        </td>
-                        <td>Rp <?= number_format($barang['harga'], 0, ',', '.') ?></td>
-                        <td>
-                            <small class="text-muted">
-                                <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
-                            </small>
-                        </td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <a href="edit.php?id=<?= $barang['id'] ?>" class="btn btn-sm btn-warning" title="Edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="14" height="14">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                    </svg>
-                                </a>
-                                <button onclick="hapusBarang(<?= $barang['id'] ?>, '<?= htmlspecialchars($barang['nama_barang'], ENT_QUOTES) ?>')" 
-                                        class="btn btn-sm btn-danger" title="Hapus">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="14" height="14">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
+             <tbody>
+<?php $no = 1; foreach ($data_barang as $barang): ?>
+<tr>
+    <td><?= $no++ ?></td>
+
+    <td>
+        <strong><?= htmlspecialchars($barang['nama_barang']) ?></strong>
+    </td>
+
+    <!-- KATEGORI -->
+    <td>
+        <?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?>
+    </td>
+
+    <!-- SATUAN -->
+    <td>
+        <?= htmlspecialchars($barang['satuan']) ?>
+    </td>
+
+    <!-- STOK -->
+    <td>
+        <?php
+            $stok = (int)$barang['stok'];
+            if ($stok > 10) {
+                $badge = 'success';
+            } elseif ($stok > 0) {
+                $badge = 'warning';
+            } else {
+                $badge = 'danger';
+            }
+        ?>
+        <span class="badge bg-<?= $badge ?>">
+            <?= $stok ?>
+        </span>
+    </td>
+
+    <!-- HARGA -->
+    <td>
+        Rp <?= number_format($barang['harga'], 0, ',', '.') ?>
+    </td>
+
+    <!-- STATUS -->
+    <!-- <td>
+        <?= htmlspecialchars($barang['status']) ?>
+    </td> -->
+
+    <!-- UPDATE -->
+    <td>
+        <small class="text-muted">
+            <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
+        </small>
+    </td>
+
+    <!-- AKSI -->
+    <td>
+        <div class="btn-group">
+            <a href="edit.php?id=<?= $barang['id'] ?>" class="btn btn-sm btn-warning">
+                Edit
+            </a>
+            <button
+                onclick="hapusBarang(<?= $barang['id'] ?>, '<?= htmlspecialchars($barang['nama_barang'], ENT_QUOTES) ?>')"
+                class="btn btn-sm btn-danger">
+                Hapus
+            </button>
+        </div>
+    </td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+
             </table>
         </div>
     </div>
