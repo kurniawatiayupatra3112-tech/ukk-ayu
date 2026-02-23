@@ -29,7 +29,7 @@ fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
 // Header info
 fputcsv($output, ['LAPORAN DATA BARANG']);
-fputcsv($output, ['INVENTARIS JENAB']);
+fputcsv($output, ['INVENTARIS AYU']);
 fputcsv($output, ['']);
 fputcsv($output, ['Tanggal Export:', date('d/m/Y H:i:s')]);
 fputcsv($output, ['']);
