@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Inventaris Jenab</title>
+    <title>Login | Inventaris Ayu</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 50%, #3a7ca5 100%);
+            background: linear-gradient(135deg, #2196f3 0%, #ec4899 50%, #2196f3 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             position: relative;
@@ -110,9 +110,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .login-card .btn-primary {
+            background: linear-gradient(135deg, #2196f3 0%, #ec4899 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .login-card .btn-primary:hover {
+            background: linear-gradient(135deg, #ec4899 0%, #2196f3 100%);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .login-card .btn-primary:active {
+            transform: translateY(0);
+        }
+
         .login-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 0 60px rgba(30, 58, 95, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 0 60px rgba(236, 72, 153, 0.4);
         }
 
         .login-header {
@@ -123,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-header .logo {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%);
+            background: linear-gradient(135deg, #2196f3 0%, #ec4899 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -253,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                 </svg>
             </div>
-            <h1>Inventaris Jenab</h1>
+            <h1>Inventaris Ayu</h1>
             <p>Silakan login untuk melanjutkan</p>
         </div>
         
@@ -284,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         
         <div class="demo-box">
-            <p><strong>Demo:</strong> jenab / jenab123</p>
+            <p><strong>Demo:</strong> ayu / ayu123</p>
         </div>
     </div>
 </body>
