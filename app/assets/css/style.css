@@ -8,9 +8,9 @@
    ROOT VARIABLES - Soft Colors
 ======================================== */
 :root {
-    --primary: #2196f3; /* base blue */
-    --primary-hover: #ec4899; /* pink on hover */
-    --primary-light: #e0f7fa; /* very light blue */
+    --primary: #2196f3 !important; /* base blue */
+    --primary-hover: #ec4899 !important; /* pink on hover */
+    --primary-light: #e0f7fa !important; /* very light blue */
 
     --bg-body: #f5f7fa;
     --bg-sidebar: #ffffff;
@@ -93,7 +93,8 @@ body {
 }
 
 .sidebar-logo svg {
-    color: var(--primary);
+    color: #2196f3 !important;
+}
 }
 
 /* Sidebar Navigation */
@@ -143,8 +144,9 @@ body {
 }
 
 .nav-item.active {
-    background: var(--primary-light);
-    color: var(--primary);
+    background: #e0f7fa !important;
+    color: #2196f3 !important;
+}
 }
 
 /* Sidebar Footer */
@@ -340,14 +342,15 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
+    background: #2196f3 !important;
+    border-color: #2196f3 !important;
+    color: white !important;
 }
 
 .btn-primary:hover {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
+    background: #ec4899 !important;
+    border-color: #ec4899 !important;
+}
 }
 
 .btn-outline-primary {
