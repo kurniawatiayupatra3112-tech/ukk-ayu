@@ -67,8 +67,8 @@ body {
 ======================================== */
 .sidebar {
     width: var(--sidebar-width);
-    background: var(--bg-sidebar);
-    border-right: 1px solid var(--border-color);
+    background: #f0f9ff !important;
+    border-right: 2px solid #2196f3 !important;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -76,6 +76,7 @@ body {
     left: 0;
     height: 100vh;
     z-index: 100;
+}
 }
 
 .sidebar-header {
@@ -232,13 +233,16 @@ body {
 ======================================== */
 .page-header {
     margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid #2196f3 !important;
 }
 
 .page-header h1 {
     font-size: 24px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #2196f3 !important;
     margin-bottom: 4px;
+}
 }
 
 .page-header p {
@@ -291,8 +295,9 @@ body {
 }
 
 .stat-card .stat-icon.primary {
-    background: var(--primary-light);
-    color: var(--primary);
+    background: #e0f7fa !important;
+    color: #2196f3 !important;
+}
 }
 
 .stat-card .stat-icon.success {
