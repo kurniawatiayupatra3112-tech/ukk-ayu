@@ -7,12 +7,12 @@ $page_title = 'Data Barang';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../config/koneksi.php';
 
+// ✅ QUERY DIPERBAIKI - Tidak ada JOIN dengan tabel kategori
 $stmt = $pdo->query("
     SELECT 
         b.*,
-        k.nama_kategori
+        b.kategori AS nama_kategori
     FROM barang b
-    LEFT JOIN kategori k ON b.id_kategori = k.id
     ORDER BY b.id DESC
 ");
 $data_barang = $stmt->fetchAll();
@@ -102,81 +102,73 @@ foreach ($data_barang as $b) {
                         <th>Satuan</th>
                         <th width="12%">Stok</th>
                         <th width="18%">Harga</th>
-                        <!-- <th width="18%">Status</th> -->
                         <th width="15%">Terakhir Update</th>
                         <th width="12%">Aksi</th>
                     </tr>
                 </thead>
-             <tbody>
-<?php $no = 1; foreach ($data_barang as $barang): ?>
-<tr>
-    <td><?= $no++ ?></td>
-
-    <td>
-        <strong><?= htmlspecialchars($barang['nama_barang']) ?></strong>
-    </td>
-
-    <!-- KATEGORI -->
-    <td>
-        <?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?>
-    </td>
-
-    <!-- SATUAN -->
-    <td>
-        <?= htmlspecialchars($barang['satuan']) ?>
-    </td>
-
-    <!-- STOK -->
-    <td>
-        <?php
-            $stok = (int)$barang['stok'];
-            if ($stok > 10) {
-                $badge = 'success';
-            } elseif ($stok > 0) {
-                $badge = 'warning';
-            } else {
-                $badge = 'danger';
-            }
-        ?>
-        <span class="badge bg-<?= $badge ?>">
-            <?= $stok ?>
-        </span>
-    </td>
-
-    <!-- HARGA -->
-    <td>
-        Rp <?= number_format($barang['harga'], 0, ',', '.') ?>
-    </td>
-
-    <!-- STATUS -->
-    <!-- <td>
-        <?= htmlspecialchars($barang['status']) ?>
-    </td> -->
-
-    <!-- UPDATE -->
-    <td>
-        <small class="text-muted">
-            <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
-        </small>
-    </td>
-
-    <!-- AKSI -->
-    <td>
-        <div class="btn-group">
-            <a href="edit.php?id=<?= $barang['id'] ?>" class="btn btn-sm btn-warning">
-                Edit
-            </a>
-            <button
-                onclick="hapusBarang(<?= $barang['id'] ?>, '<?= htmlspecialchars($barang['nama_barang'], ENT_QUOTES) ?>')"
-                class="btn btn-sm btn-danger">
-                Hapus
-            </button>
-        </div>
-    </td>
-</tr>
-<?php endforeach; ?>
-</tbody>
-
+                <tbody>
+                    <?php $no = 1; foreach ($data_barang as $barang): ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td>
+                            <strong><?= htmlspecialchars($barang['nama_barang']) ?></strong>
+                        </td>
+                        
+                        <!-- KATEGORI - diambil dari kolom kategori -->
+                        <td>
+                            <?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?>
+                        </td>
+                        
+                        <!-- SATUAN -->
+                        <td>
+                            <?= htmlspecialchars($barang['satuan']) ?>
+                        </td>
+                        
+                        <!-- STOK -->
+                        <td>
+                            <?php
+                                $stok = (int)$barang['stok'];
+                                if ($stok > 10) {
+                                    $badge = 'success';
+                                } elseif ($stok > 0) {
+                                    $badge = 'warning';
+                                } else {
+                                    $badge = 'danger';
+                                }
+                            ?>
+                            <span class="badge bg-<?= $badge ?>">
+                                <?= $stok ?>
+                            </span>
+                        </td>
+                        
+                        <!-- HARGA -->
+                        <td>
+                            Rp <?= number_format($barang['harga'], 0, ',', '.') ?>
+                        </td>
+                        
+                        <!-- UPDATE -->
+                        <td>
+                            <small class="text-muted">
+                                <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
+                            </small>
+                        </td>
+                        
+                        <!-- AKSI -->
+                        <td>
+                            <div class="btn-group">
+                                <a href="edit.php?id=<?= $barang['id'] ?>" class="btn btn-sm btn-warning">
+                                    Edit
+                                </a>
+                                <button
+                                    onclick="hapusBarang(<?= $barang['id'] ?>, '<?= htmlspecialchars($barang['nama_barang'], ENT_QUOTES) ?>')"
+                                    class="btn btn-sm btn-danger">
+                                    Hapus
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>
