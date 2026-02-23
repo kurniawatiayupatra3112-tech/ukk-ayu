@@ -8,9 +8,9 @@
    ROOT VARIABLES - Soft Colors
 ======================================== */
 :root {
-    --primary: #2196f3 !important; /* base blue */
-    --primary-hover: #ec4899 !important; /* pink on hover */
-    --primary-light: #e0f7fa !important; /* very light blue */
+    --primary: #1e3a5f;
+    --primary-hover: #2d5a8c;
+    --primary-light: #eef4fa;
 
     --bg-body: #f5f7fa;
     --bg-sidebar: #ffffff;
@@ -67,8 +67,8 @@ body {
 ======================================== */
 .sidebar {
     width: var(--sidebar-width);
-    background: #f0f9ff !important;
-    border-right: 2px solid #2196f3 !important;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -76,7 +76,6 @@ body {
     left: 0;
     height: 100vh;
     z-index: 100;
-}
 }
 
 .sidebar-header {
@@ -94,8 +93,7 @@ body {
 }
 
 .sidebar-logo svg {
-    color: #2196f3 !important;
-}
+    color: var(--primary);
 }
 
 /* Sidebar Navigation */
@@ -145,9 +143,8 @@ body {
 }
 
 .nav-item.active {
-    background: #e0f7fa !important;
-    color: #2196f3 !important;
-}
+    background: var(--primary-light);
+    color: var(--primary);
 }
 
 /* Sidebar Footer */
@@ -233,16 +230,13 @@ body {
 ======================================== */
 .page-header {
     margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 3px solid #2196f3 !important;
 }
 
 .page-header h1 {
     font-size: 24px;
     font-weight: 600;
-    color: #2196f3 !important;
+    color: var(--text-primary);
     margin-bottom: 4px;
-}
 }
 
 .page-header p {
@@ -295,9 +289,8 @@ body {
 }
 
 .stat-card .stat-icon.primary {
-    background: #e0f7fa !important;
-    color: #2196f3 !important;
-}
+    background: var(--primary-light);
+    color: var(--primary);
 }
 
 .stat-card .stat-icon.success {
@@ -347,15 +340,14 @@ body {
 }
 
 .btn-primary {
-    background: #2196f3 !important;
-    border-color: #2196f3 !important;
-    color: white !important;
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
 }
 
 .btn-primary:hover {
-    background: #ec4899 !important;
-    border-color: #ec4899 !important;
-}
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
 }
 
 .btn-outline-primary {
@@ -623,7 +615,6 @@ body {
 
 .login-card {
     background: rgba(255, 255, 255, 0.95);
-    -webkit-backdrop-filter: blur(10px); /* Safari 9+ */
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
