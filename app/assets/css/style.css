@@ -8,9 +8,9 @@
    ROOT VARIABLES - Soft Colors
 ======================================== */
 :root {
-    --primary: #1e3a5f;
-    --primary-hover: #2d5a8c;
-    --primary-light: #eef4fa;
+    --primary: #2196f3; /* base blue */
+    --primary-hover: #ec4899; /* pink on hover */
+    --primary-light: #e0f7fa; /* very light blue */
 
     --bg-body: #f5f7fa;
     --bg-sidebar: #ffffff;
