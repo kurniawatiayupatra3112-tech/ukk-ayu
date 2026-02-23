@@ -15,12 +15,12 @@ date_default_timezone_set('Asia/Jakarta');
 $current_file = basename($_SERVER['PHP_SELF']);
 if ($current_file !== 'login.php' && !isset($_SESSION['user_id'])) {
     // Kalau belum login dan bukan halaman login, tendang ke login
-    header('Location: /gudang/app/auth/login.php');
+    header('Location: /ukk-ayu/app/auth/login.php');
     exit;
 }
 
 // Base URL untuk link
-$base_url = '/gudang';
+$base_url = '/ukk-ayu';
 
 // Mengetahui halaman aktif (untuk highlight menu)
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
