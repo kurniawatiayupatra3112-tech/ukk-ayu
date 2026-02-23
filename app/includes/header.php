@@ -19,10 +19,15 @@ if ($current_file !== 'login.php' && !isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Base URL untuk link. gunakan dirname SCRIPT_NAME agar otomatis sesuai
-$base_url = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-if ($base_url === '') {
-    // jika menuju root, biarkan kosong
+// Base URL untuk link.
+// Jika hosting berada di dalam folder 'app' (seperti /app/auth/login.php),
+// kita naik dua tingkat untuk mendapatkan root aplikasi.
+// Contoh:
+//   /app/auth/login.php    -> base_url = ''
+//   /ukk-ayu/app/auth/login.php -> base_url = '/ukk-ayu'
+$base_url = dirname(dirname(dirname($_SERVER['SCRIPT_NAME'])));
+$base_url = rtrim($base_url, '/\\');
+if ($base_url === '\\') {
     $base_url = '';
 }
 
