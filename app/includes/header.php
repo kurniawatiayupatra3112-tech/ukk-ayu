@@ -15,12 +15,16 @@ date_default_timezone_set('Asia/Jakarta');
 $current_file = basename($_SERVER['PHP_SELF']);
 if ($current_file !== 'login.php' && !isset($_SESSION['user_id'])) {
     // Kalau belum login dan bukan halaman login, tendang ke login
-    header('Location: /ukk-ayu/app/auth/login.php');
+    header('Location: ' . $base_url . '/app/auth/login.php');
     exit;
 }
 
-// Base URL untuk link
-$base_url = '/ukk-ayu';
+// Base URL untuk link. gunakan dirname SCRIPT_NAME agar otomatis sesuai
+$base_url = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+if ($base_url === '') {
+    // jika menuju root, biarkan kosong
+    $base_url = '';
+}
 
 // Mengetahui halaman aktif (untuk highlight menu)
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
