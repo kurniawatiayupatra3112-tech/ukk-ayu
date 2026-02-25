@@ -8,7 +8,7 @@
 $host = 'localhost';           // Alamat server database
 $dbname = 'inventaris_ayupatra'; // Nama database
 $username = 'root';            // Username MySQL (default: root)
-$password = 'baru123';                // Password MySQL (default: kosong)
+$password = 'git';                // Password MySQL (default: kosong)
 
 try {
     // Membuat koneksi ke database
