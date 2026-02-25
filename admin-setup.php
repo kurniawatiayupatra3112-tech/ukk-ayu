@@ -8,7 +8,7 @@
 $host = 'localhost';
 $dbname = 'inventaris_ayupatra';
 $username = 'root';
-$password = 'baru123';
+$password = '';
 
 try {
     $pdo = new PDO(
@@ -21,8 +21,8 @@ try {
     echo "<h2>🔧 Setup Admin Account</h2>";
     
     // Generate password hash
-    $new_username = 'ayu';
-    $new_password = 'ayu123';
+    $new_username = 'ayunda';
+    $new_password = 'ayunda1931';
     $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
     
     echo "<p>Username: <strong>$new_username</strong></p>";
