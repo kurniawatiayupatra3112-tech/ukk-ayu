@@ -7,12 +7,15 @@ $page_title = 'Data Barang';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../config/koneksi.php';
 
-// ✅ QUERY DIPERBAIKI - Tidak ada JOIN dengan tabel kategori
+// ✅ QUERY DIPERBAIKI - Menggunakan LEFT JOIN ke tabel kategori
+// ⚠️ PENTING: Sesuaikan nama tabel 'kategori' jika di database Anda 'tb_kategori'
+// ✅ QUERY DIPERBAIKI - JOIN dengan primary key 'id' di tabel kategori
 $stmt = $pdo->query("
     SELECT 
         b.*,
-        b.kategori AS nama_kategori
+        k.nama_kategori AS nama_kategori
     FROM barang b
+    LEFT JOIN kategori k ON b.id_kategori = k.id  -- ⚠️ Perhatikan: k.id (bukan k.id_kategori)
     ORDER BY b.id DESC
 ");
 $data_barang = $stmt->fetchAll();
@@ -114,7 +117,7 @@ foreach ($data_barang as $b) {
                             <strong><?= htmlspecialchars($barang['nama_barang']) ?></strong>
                         </td>
                         
-                        <!-- KATEGORI - diambil dari kolom kategori -->
+                        <!-- KATEGORI - diambil dari hasil JOIN tabel kategori -->
                         <td>
                             <?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?>
                         </td>

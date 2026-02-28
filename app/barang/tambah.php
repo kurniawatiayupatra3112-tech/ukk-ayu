@@ -2,18 +2,20 @@
 /**
  * Tambah Barang - Form Input Modern dengan Auto-Fill Satuan
  * Theme: Blue & Pink ✨
+ * ✅ FIX: Query kategori diperbaiki
  */
 
 $page_title = 'Tambah Barang';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../config/koneksi.php';
 
-// Ambil daftar kategori unik dari database
-$stmt = $pdo->query("SELECT DISTINCT kategori FROM barang WHERE kategori IS NOT NULL AND kategori != '' ORDER BY kategori ASC");
-$kategori_list = $stmt->fetchAll(PDO::FETCH_COLUMN);
+// ✅ QUERY DIPERBAIKI - Ambil dari tabel 'kategori', bukan kolom 'kategori' di tabel barang
+// ⚠️ Sesuaikan nama tabel 'kategori' jika di database Anda 'tb_kategori'
+$stmt = $pdo->query("SELECT id, nama_kategori FROM kategori WHERE nama_kategori IS NOT NULL AND nama_kategori != '' ORDER BY nama_kategori ASC");
+$kategori_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!-- Custom CSS untuk Form Modern -->
+<!-- Custom CSS untuk Form Modern (Sama seperti sebelumnya) -->
 <style>
     :root {
         --blue-primary: #3b82f6;
@@ -226,17 +228,19 @@ $kategori_list = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
                 <div class="form-row">
                     <div class="mb-3">
-                        <label for="kategori" class="form-label">
+                        <label for="id_kategori" class="form-label">
                             <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                             </svg>
                             Kategori <span class="required">*</span>
                         </label>
-                        <select class="form-select" id="kategori" name="kategori" required>
+                        <!-- ✅ FIX: name="id_kategori" sesuai kolom database -->
+                        <select class="form-select" id="id_kategori" name="id_kategori" required>
                             <option value="">-- Pilih Kategori --</option>
                             <?php foreach ($kategori_list as $kat): ?>
-                                <option value="<?= htmlspecialchars($kat) ?>">
-                                    <?= htmlspecialchars($kat) ?>
+                                <!-- ✅ FIX: value=id, tampilan=nama_kategori -->
+                                <option value="<?= htmlspecialchars($kat['id']) ?>">
+                                    <?= htmlspecialchars($kat['nama_kategori']) ?>
                                 </option>
                             <?php endforeach; ?>
                             <option value="lainnya" style="color: var(--pink-primary); font-weight: 500;">
@@ -373,12 +377,13 @@ $kategori_list = $stmt->fetchAll(PDO::FETCH_COLUMN);
 <!-- JavaScript untuk Auto-Fill & Validasi -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const kategoriSelect = document.getElementById('kategori');
+    // ✅ FIX: ID selector diubah dari 'kategori' menjadi 'id_kategori'
+    const kategoriSelect = document.getElementById('id_kategori');
     const satuanSelect = document.getElementById('satuan');
     const satuanHint = document.getElementById('satuan-hint');
     const satuanDisplay = document.getElementById('satuan-display');
     
-    // Mapping kategori ke satuan default
+    // Mapping kategori (by NAME) ke satuan default
     const satuanMap = {
         'Elektronik': 'unit', 'Gadget': 'unit', 'Komputer': 'unit', 'Aksesoris': 'pcs',
         'ATK': 'pcs', 'Alat Tulis': 'pcs', 'Kertas': 'rim', 'Buku': 'buah',
@@ -389,8 +394,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Fungsi auto-fill satuan dengan animasi
-    function autoFillSatuan(kategori) {
-        const defaultSatuan = satuanMap[kategori] || '';
+    function autoFillSatuan(kategoriName) {
+        const defaultSatuan = satuanMap[kategoriName] || '';
         
         if (defaultSatuan) {
             // Animasi perubahan
@@ -411,8 +416,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Event listeners
-    kategoriSelect.addEventListener('change', (e) => autoFillSatuan(e.target.value));
+    // ✅ FIX: Event listener menggunakan selected TEXT, bukan value (ID)
+    kategoriSelect.addEventListener('change', (e) => {
+        const selectedOption = e.target.options[e.target.selectedIndex];
+        const kategoriName = selectedOption.text.trim();
+        autoFillSatuan(kategoriName);
+    });
     
     // Update display harga saat satuan berubah manual
     satuanSelect.addEventListener('change', (e) => {
@@ -432,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('formTambahBarang').addEventListener('submit', function(e) {
         const fields = [
             { id: 'nama_barang', label: 'Nama Barang' },
-            { id: 'kategori', label: 'Kategori' },
+            { id: 'id_kategori', label: 'Kategori' }, // ✅ FIX: ID field
             { id: 'satuan', label: 'Satuan' },
             { id: 'harga', label: 'Harga' }
         ];
