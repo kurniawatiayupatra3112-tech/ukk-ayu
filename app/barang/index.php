@@ -2,20 +2,17 @@
 /**
  * Data Barang - List dengan Search, Pagination, dan Export
  */
-
 $page_title = 'Data Barang';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../config/koneksi.php';
 
 // ✅ QUERY DIPERBAIKI - Menggunakan LEFT JOIN ke tabel kategori
-// ⚠️ PENTING: Sesuaikan nama tabel 'kategori' jika di database Anda 'tb_kategori'
-// ✅ QUERY DIPERBAIKI - JOIN dengan primary key 'id' di tabel kategori
 $stmt = $pdo->query("
     SELECT 
         b.*,
         k.nama_kategori AS nama_kategori
     FROM barang b
-    LEFT JOIN kategori k ON b.id_kategori = k.id  -- ⚠️ Perhatikan: k.id (bukan k.id_kategori)
+    LEFT JOIN kategori k ON b.id_kategori = k.id
     ORDER BY b.id DESC
 ");
 $data_barang = $stmt->fetchAll();
@@ -116,17 +113,14 @@ foreach ($data_barang as $b) {
                         <td>
                             <strong><?= htmlspecialchars($barang['nama_barang']) ?></strong>
                         </td>
-                        
                         <!-- KATEGORI - diambil dari hasil JOIN tabel kategori -->
                         <td>
                             <?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?>
                         </td>
-                        
                         <!-- SATUAN -->
                         <td>
                             <?= htmlspecialchars($barang['satuan']) ?>
                         </td>
-                        
                         <!-- STOK -->
                         <td>
                             <?php
@@ -143,19 +137,16 @@ foreach ($data_barang as $b) {
                                 <?= $stok ?>
                             </span>
                         </td>
-                        
-                        <!-- HARGA -->
+                        <!-- HARGA - Format dengan number_format yang benar -->
                         <td>
                             Rp <?= number_format($barang['harga'], 0, ',', '.') ?>
                         </td>
-                        
                         <!-- UPDATE -->
                         <td>
                             <small class="text-muted">
                                 <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
                             </small>
                         </td>
-                        
                         <!-- AKSI -->
                         <td>
                             <div class="btn-group">
@@ -184,6 +175,7 @@ foreach ($data_barang as $b) {
 $(document).ready(function() {
     $('#tabelBarang').DataTable({
         language: {
+            // ✅ FIX: Hapus spasi di akhir URL
             url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
             search: "Cari:",
             lengthMenu: "Tampilkan _MENU_ data",

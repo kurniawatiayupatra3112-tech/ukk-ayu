@@ -123,4 +123,16 @@ $current_dir  = basename(dirname($_SERVER['PHP_SELF']));
         </div>
     </div>
 
-    
+    <a href="<?= $base_url ?>/app/auth/logout.php" class="logout-btn" title="Logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V7" />
+        </svg>
+    </a>
+</div>
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="main-content">
