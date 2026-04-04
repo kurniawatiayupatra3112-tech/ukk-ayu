@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stok          = (int) ($_POST['stok'] ?? 0);
     $stok_minimal  = (int) ($_POST['stok_minimal'] ?? 0);
     $harga         = (float) ($_POST['harga'] ?? 0);
-    $status        = 'aktif';
 
     if ($nama_barang === '') {
         $error = 'Nama barang wajib diisi!';
@@ -37,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt = $pdo->prepare("
             INSERT INTO barang
-            (nama_barang, id_kategori, satuan, stok, stok_minimal, harga, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (nama_barang, id_kategori, satuan, stok, stok_minimal, harga)
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
 
         if ($stmt->execute([
@@ -47,8 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $satuan,
             $stok,
             $stok_minimal,
-            $harga,
-            $status
+            $harga
         ])) {
             header('Location: index.php');
             exit;

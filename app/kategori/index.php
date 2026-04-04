@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt = $pdo->prepare("
             INSERT INTO barang
-            (nama_barang, id_kategori, satuan, stok, stok_minimal, harga, status)
-            VALUES (?, ?, ?, ?, ?, ?, 'aktif')
+            (nama_barang, id_kategori, satuan, stok, stok_minimal, harga)
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
 
         $stmt->execute([

@@ -267,7 +267,7 @@ foreach ($data_barang as $b) {
             </div>
             <div class="info-item">
                 <div class="label">Total Nilai Inventaris</div>
-                <div class="value">Rp <?= number_format($total_nilai, 0, ',', '.') ?></div>
+                <div class="value">Rp <?= number_format($total_nilai, 2, ',', '.') ?></div>
             </div>
         </div>
         
@@ -298,8 +298,8 @@ foreach ($data_barang as $b) {
                     <td class="text-center">
                         <span class="stok-badge <?= $stok_class ?>"><?= $b['stok'] ?></span>
                     </td>
-                    <td class="text-right">Rp <?= number_format($b['harga'], 0, ',', '.') ?></td>
-                    <td class="text-right">Rp <?= number_format($nilai, 0, ',', '.') ?></td>
+                    <td class="text-right">Rp <?= number_format($b['harga'], 2, ',', '.') ?></td>
+                    <td class="text-right">Rp <?= number_format($nilai, 2, ',', '.') ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -317,7 +317,7 @@ foreach ($data_barang as $b) {
                     <div class="label">Total Unit</div>
                 </div>
                 <div class="summary-item">
-                    <div class="value">Rp <?= number_format($total_nilai, 0, ',', '.') ?></div>
+                    <div class="value">Rp <?= number_format($total_nilai, 2, ',', '.') ?></div>
                     <div class="label">Nilai Inventaris</div>
                 </div>
             </div>

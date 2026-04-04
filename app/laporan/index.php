@@ -89,7 +89,7 @@ $barang_terlaris = $stmt->fetchAll();
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </div>
-            <div class="stat-value" style="font-size: 18px;">Rp <?= number_format($nilai_masuk, 0, ',', '.') ?></div>
+            <div class="stat-value" style="font-size: 18px;">Rp <?= number_format($nilai_masuk, 2, ',', '.') ?></div>
             <div class="stat-label">Nilai Masuk</div>
         </div>
     </div>
@@ -100,7 +100,7 @@ $barang_terlaris = $stmt->fetchAll();
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </div>
-            <div class="stat-value" style="font-size: 18px;">Rp <?= number_format($nilai_keluar, 0, ',', '.') ?></div>
+            <div class="stat-value" style="font-size: 18px;">Rp <?= number_format($nilai_keluar, 2, ',', '.') ?></div>
             <div class="stat-label">Nilai Keluar</div>
         </div>
     </div>
@@ -197,8 +197,8 @@ $barang_terlaris = $stmt->fetchAll();
                                             <?= ucfirst($t['jenis_transaksi']) ?>
                                         </span></td>
                                         <td><?= number_format($t['jumlah']) ?></td>
-                                        <td>Rp <?= number_format($t['harga'], 0, ',', '.') ?></td>
-                                        <td>Rp <?= number_format($t['jumlah'] * $t['harga'], 0, ',', '.') ?></td>
+                                        <td>Rp <?= number_format($t['harga'], 2, ',', '.') ?></td>
+                                        <td>Rp <?= number_format($t['jumlah'] * $t['harga'], 2, ',', '.') ?></td>
                                         <td><?= htmlspecialchars($t['keterangan']) ?></td>
                                     </tr>
                                 <?php endforeach; ?>

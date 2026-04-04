@@ -72,7 +72,7 @@ fputcsv($output, ['']);
 fputcsv($output, ['RINGKASAN']);
 fputcsv($output, ['Total Jenis Barang:', count($data_barang)]);
 fputcsv($output, ['Total Stok:', $total_stok, 'unit']);
-fputcsv($output, ['Total Nilai Inventaris:', 'Rp ' . number_format($total_nilai, 0, ',', '.')]);
+fputcsv($output, ['Total Nilai Inventaris:', 'Rp ' . number_format($total_nilai, 2, ',', '.')]);
 
 fclose($output);
 exit;

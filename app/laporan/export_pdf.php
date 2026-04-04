@@ -298,8 +298,8 @@ foreach ($data_barang as $b) {
                     <td class="text-center">
                         <span class="stok-badge <?= $stok_class ?>"><?= $b['stok'] ?></span>
                     </td>
-                    <td class="text-right">Rp <?= number_format($b['harga'], 0, ',', '.') ?></td>
-                    <td class="text-right">Rp <?= number_format($nilai, 0, ',', '.') ?></td>
+                    <td class="text-right">Rp <?= number_format($b['harga'], 2, ',', '.') ?></td>
+                    <td class="text-right">Rp <?= number_format($nilai, 2, ',', '.') ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

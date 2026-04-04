@@ -92,8 +92,8 @@ try {
         INSERT INTO barang (
             kode_barang, nama_barang, id_kategori, satuan, 
             stok, stok_minimal, harga, lokasi, keterangan, foto,
-            status, kondisi, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'aktif', 'baik', NOW(), NOW())
+            kondisi, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'baik', NOW(), NOW())
     ");
 
     $stmt->execute([
