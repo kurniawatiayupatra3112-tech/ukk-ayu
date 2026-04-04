@@ -7,13 +7,6 @@
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
-// Cek login
-require_once __DIR__ . '/../config/koneksi.php';
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ' . BASE_URL . '/app/auth/login.php');
-    exit;
-}
-
 require_once __DIR__ . '/../config/koneksi.php';
 
 $stmt = $pdo->query("SELECT id, nama_barang, stok FROM barang ORDER BY nama_barang");
@@ -156,12 +149,13 @@ function updateStokInfo() {
     const option = select.options[select.selectedIndex];
     const stokInfo = document.getElementById('stokInfo');
     
-    if (option.value) {
+    if (option && option.value) {
         const stok = option.dataset.stok;
         stokInfo.innerHTML = `<span class="badge bg-primary">Stok tersedia: ${stok}</span>`;
         document.getElementById('inputJumlah').max = stok;
     } else {
         stokInfo.innerHTML = '';
+        document.getElementById('inputJumlah').removeAttribute('max');
     }
 }
 
@@ -172,7 +166,7 @@ function validateJumlah() {
     const warning = document.getElementById('jumlahWarning');
     const btn = document.getElementById('btnSubmit');
     
-    if (option.value) {
+    if (option && option.value) {
         const stok = parseInt(option.dataset.stok);
         const jumlah = parseInt(input.value) || 0;
         
@@ -187,6 +181,12 @@ function validateJumlah() {
         }
     }
 }
+
+window.addEventListener('DOMContentLoaded', function() {
+    updateStokInfo();
+    validateJumlah();
+});
 </script>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
+

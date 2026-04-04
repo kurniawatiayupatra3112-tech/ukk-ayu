@@ -113,7 +113,7 @@ foreach ($data_transaksi as $t) {
                     <th>Jenis</th>
                     <th>Jumlah</th>
                     <th>Keterangan</th>
-                    <th>Aksi</th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -125,18 +125,10 @@ foreach ($data_transaksi as $t) {
                     <td><?= ucfirst($t['jenis_transaksi']) ?></td>
                     <td><?= $t['jumlah'] ?></td>
                     <td><?= htmlspecialchars($t['keterangan'] ?: '-') ?></td>
-                    <td>
-                        <button class="btn btn-sm btn-info"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalDetail"
-                            data-nama="<?= htmlspecialchars($t['nama_barang']) ?>"
-                            data-tanggal="<?= date('d/m/Y H:i', strtotime($t['tanggal_transaksi'])) ?>"
-                            data-jenis="<?= ucfirst($t['jenis_transaksi']) ?>"
-                            data-jumlah="<?= $t['jumlah'] ?>"
-                            data-keterangan="<?= htmlspecialchars($t['keterangan'] ?: '-') ?>">
-                            Detail
-                        </button>
-                    </td>
+                    
+
+
+                    
                 </tr>
                 <?php endforeach ?>
             </tbody>
@@ -146,26 +138,6 @@ foreach ($data_transaksi as $t) {
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
 
-<!-- MODAL DETAIL -->
-<div class="modal fade" id="modalDetail" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Detail Transaksi</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-sm">
-          <tr><th>Nama Barang</th><td id="dNama"></td></tr>
-          <tr><th>Tanggal</th><td id="dTanggal"></td></tr>
-          <tr><th>Jenis</th><td id="dJenis"></td></tr>
-          <tr><th>Jumlah</th><td id="dJumlah"></td></tr>
-          <tr><th>Keterangan</th><td id="dKeterangan"></td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 $(document).ready(function() {

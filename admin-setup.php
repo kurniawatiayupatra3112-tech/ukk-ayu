@@ -1,7 +1,7 @@
 <?php
 /**
  * Setup Admin Account
- * Buat user baru: gudang / gudang123
+ * Buat user baru: jenab / jenab123
  */
 
 // Konfigurasi database langsung

@@ -141,7 +141,7 @@ $barang_terlaris = $stmt->fetchAll();
                 <?php if (empty($barang_terlaris)): ?>
                     <p class="text-muted text-center py-4">Belum ada data</p>
                 <?php else: ?>
-                    <table class="table">
+                    <table class="table table-striped table-hover mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -159,6 +159,52 @@ $barang_terlaris = $stmt->fetchAll();
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">Daftar Transaksi</div>
+            <div class="card-body p-0">
+                <?php if (empty($data_transaksi)): ?>
+                    <div class="text-center text-muted p-4">Tidak ada transaksi pada rentang tanggal ini.</div>
+                <?php else: ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tanggal</th>
+                                    <th>Barang</th>
+                                    <th>Jenis</th>
+                                    <th>Jumlah</th>
+                                    <th>Harga</th>
+                                    <th>Total</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data_transaksi as $index => $t): ?>
+                                    <tr>
+                                        <td><?= $index + 1 ?></td>
+                                        <td><?= date('d/m/Y H:i', strtotime($t['tanggal_transaksi'])) ?></td>
+                                        <td><?= htmlspecialchars($t['nama_barang']) ?></td>
+                                        <td><span class="badge <?= $t['jenis_transaksi'] === 'masuk' ? 'bg-success' : 'bg-danger' ?>">
+                                            <?= ucfirst($t['jenis_transaksi']) ?>
+                                        </span></td>
+                                        <td><?= number_format($t['jumlah']) ?></td>
+                                        <td>Rp <?= number_format($t['harga'], 0, ',', '.') ?></td>
+                                        <td>Rp <?= number_format($t['jumlah'] * $t['harga'], 0, ',', '.') ?></td>
+                                        <td><?= htmlspecialchars($t['keterangan']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>

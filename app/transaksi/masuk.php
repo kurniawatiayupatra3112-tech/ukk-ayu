@@ -7,12 +7,6 @@
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
-// Cek login
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /bahan-ajar-ukk/app/auth/login.php');
-    exit;
-}
-
 require_once __DIR__ . '/../config/koneksi.php';
 
 // Ambil daftar barang untuk dropdown
@@ -71,8 +65,8 @@ require_once __DIR__ . '/../includes/header.php';
     <p>Catat barang yang masuk ke gudang</p>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
+<div class="row g-4">
+    <div class="col-lg-7">
         <div class="card">
             <div class="card-body">
                 <?php if ($error): ?>
@@ -85,7 +79,7 @@ require_once __DIR__ . '/../includes/header.php';
                         <select name="id_barang" class="form-select" required>
                             <option value="">-- Pilih Barang --</option>
                             <?php foreach ($daftar_barang as $b): ?>
-                                <option value="<?= $b['id'] ?>">
+                                <option value="<?= $b['id'] ?>" <?= (isset($_POST['id_barang']) && $_POST['id_barang'] == $b['id']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($b['nama_barang']) ?> (Stok: <?= $b['stok'] ?>)
                                 </option>
                             <?php endforeach; ?>
@@ -94,18 +88,32 @@ require_once __DIR__ . '/../includes/header.php';
 
                     <div class="mb-3">
                         <label class="form-label">Jumlah Masuk *</label>
-                        <input type="number" name="jumlah" class="form-control" min="1" required>
+                        <input type="number" name="jumlah" class="form-control" min="1" required
+                               value="<?= htmlspecialchars($_POST['jumlah'] ?? '') ?>">
                     </div>
 
                     <div class="mb-4">
                         <label class="form-label">Keterangan</label>
                         <textarea name="keterangan" class="form-control" rows="2"
-                                  placeholder="Contoh: Pembelian dari supplier"></textarea>
+                                  placeholder="Contoh: Pembelian dari supplier"><?= htmlspecialchars($_POST['keterangan'] ?? '') ?></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <a href="riwayat.php" class="btn btn-outline-primary">Kembali</a>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header">Catatan</div>
+            <div class="card-body">
+                <ul class="mb-0 text-muted" style="line-height:1.8;">
+                    <li>Pilih barang yang sudah tersedia di daftar.</li>
+                    <li>Jumlah harus lebih dari 0 untuk disimpan.</li>
+                    <li>Transaksi masuk akan menambah stok otomatis.</li>
+                    <li>Gunakan kolom keterangan untuk referensi.</li>
+                </ul>
             </div>
         </div>
     </div>

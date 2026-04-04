@@ -11,16 +11,19 @@ if (session_status() === PHP_SESSION_NONE) {
 // Set timezone Indonesia
 date_default_timezone_set('Asia/Jakarta');
 
+// Base URL untuk link
+$base_url = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'])), '/\\');
+if ($base_url === '') {
+    $base_url = '';
+}
+
 // Cek apakah sudah login
 $current_file = basename($_SERVER['PHP_SELF']);
 if ($current_file !== 'login.php' && !isset($_SESSION['user_id'])) {
     // Kalau belum login dan bukan halaman login, tendang ke login
-    header('Location: /gudang/app/auth/login.php');
+    header('Location: ' . $base_url . '/app/auth/login.php');
     exit;
 }
-
-// Base URL untuk link
-$base_url = '/gudang';
 
 // Mengetahui halaman aktif (untuk highlight menu)
 $current_page = basename($_SERVER['PHP_SELF'], '.php');

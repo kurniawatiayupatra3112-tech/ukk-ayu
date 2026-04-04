@@ -6,7 +6,7 @@
 
 // Pengaturan database
 $host = 'localhost';           // Alamat server database
-$dbname = 'inventaris_jenab'; // Nama database
+$dbname = 'inventaris_ayupatra'; // Nama database
 $username = 'root';            // Username MySQL (default: root)
 $password = '';                // Password MySQL (default: kosong)
 

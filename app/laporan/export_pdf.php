@@ -324,7 +324,7 @@ foreach ($data_barang as $b) {
         </div>
         
         <div class="report-footer">
-            <p>Dokumen ini digenerate oleh Sistem Inventaris Fakhri</p>
+            <p>Dokumen ini digenerate oleh Sistem Inventaris Jenab</p>
             <p>UKK Level 3 Web Development &bull; <?= date('Y') ?></p>
         </div>
     </div>

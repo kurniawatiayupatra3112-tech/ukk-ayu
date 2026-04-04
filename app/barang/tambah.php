@@ -6,11 +6,6 @@
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /bahan-ajar-ukk/app/auth/login.php');
-    exit;
-}
-
 require_once __DIR__ . '/../config/koneksi.php';
 
 $error = '';
@@ -72,8 +67,8 @@ require_once __DIR__ . '/../includes/header.php';
     <p>Tambahkan barang baru ke gudang</p>
 </div>
 
-<div class="row">
-    <div class="col-md-5">
+<div class="row g-4">
+    <div class="col-lg-7">
         <div class="card">
             <div class="card-body">
                 <?php if ($error): ?>
@@ -90,11 +85,10 @@ require_once __DIR__ . '/../includes/header.php';
 
                     <div class="mb-3">
                         <label class="form-label">Kategori <span class="text-danger">*</span></label>
-                        <select name="id_kategori" class="form-control" required>
+                        <select name="id_kategori" class="form-select" required>
                             <option value="">-- Pilih Kategori --</option>
                             <?php foreach ($kategoriList as $k): ?>
-                                <option value="<?= $k['id'] ?>"
-                                    <?= (($_POST['id_kategori'] ?? '') == $k['id']) ? 'selected' : '' ?>>
+                                <option value="<?= $k['id'] ?>" <?= (($_POST['id_kategori'] ?? '') == $k['id']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($k['nama_kategori']) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -126,7 +120,7 @@ require_once __DIR__ . '/../includes/header.php';
                                value="<?= htmlspecialchars($_POST['harga'] ?? 0) ?>" min="0">
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 flex-wrap">
                         <button type="submit" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="18" height="18">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -136,6 +130,19 @@ require_once __DIR__ . '/../includes/header.php';
                         <a href="index.php" class="btn btn-outline-primary">Kembali</a>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header">Petunjuk Tambah Barang</div>
+            <div class="card-body">
+                <ul class="mb-0 text-muted" style="line-height:1.8;">
+                    <li><strong>Nama barang</strong> gunakan deskripsi singkat dan jelas.</li>
+                    <li><strong>Kategori</strong> wajib dipilih agar data mudah dikelola.</li>
+                    <li><strong>Stok awal</strong> hanya dipakai sebagai awal inventaris.</li>
+                    <li><strong>Harga</strong> bisa dikosongkan bila belum tersedia.</li>
+                </ul>
             </div>
         </div>
     </div>
