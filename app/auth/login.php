@@ -72,46 +72,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 25%, #ff6b9d 50%, #ff8fab 75%, #ffb3c1 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: linear-gradient(135deg, #1e3a5f 0%, #6b3b8a 35%, #ff6b9d 70%, #ffb3c1 100%);
             position: relative;
             overflow: hidden;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         body.login-page::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s linear infinite;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.04);
+            pointer-events: none;
             z-index: 1;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(30, 30, 30, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 40px;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 40px rgba(30, 58, 95, 0.2), 0 0 20px rgba(255, 107, 157, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 10;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -119,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .login-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 80px rgba(30, 58, 95, 0.3), 0 0 40px rgba(255, 107, 157, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.3);
         }
 
         .login-header {
@@ -130,13 +114,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-header .logo {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #1e3a5f 0%, #ff6b9d 100%);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            box-shadow: 0 8px 24px rgba(255, 107, 157, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
             animation: bounceIn 0.6s ease;
         }
 
@@ -156,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-header h1 {
             font-size: 28px;
             font-weight: 700;
-            background: linear-gradient(135deg, #1e3a5f 0%, #ff6b9d 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -164,50 +148,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .login-header p {
-            color: #64748b;
+            color: #cccccc;
             font-size: 14px;
             font-weight: 500;
         }
 
         .login-card .form-label {
             font-weight: 600;
-            color: #1e293b;
+            color: #ffffff;
             margin-bottom: 8px;
             font-size: 14px;
         }
 
         .login-card .form-control {
-            border: 2px solid #e2e8f0;
+            border: 2px solid #444444;
             border-radius: 10px;
             padding: 12px 16px;
             font-size: 14px;
             transition: all 0.3s ease;
+            background: rgba(50, 50, 50, 0.8);
+            color: #ffffff;
         }
 
         .login-card .form-control:focus {
-            border-color: #ff6b9d;
-            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+            border-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
             outline: none;
         }
 
         .login-card .form-control::placeholder {
-            color: #94a3b8;
+            color: #aaaaaa;
         }
 
         .login-card .btn-primary {
-            background: linear-gradient(135deg, #1e3a5f 0%, #ff6b9d 100%);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             border: none;
             border-radius: 10px;
             padding: 12px;
             font-weight: 600;
             font-size: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
         }
 
         .login-card .btn-primary:hover {
-            background: linear-gradient(135deg, #ff6b9d 0%, #1e3a5f 100%);
-            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+            background: linear-gradient(135deg, #333333 0%, #000000 100%);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
             transform: translateY(-2px);
         }
 
@@ -218,9 +205,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-card .alert {
             border: none;
             border-radius: 10px;
-            border-left: 4px solid #ef4444;
-            background: #fee2e2;
-            color: #991b1b;
+            border-left: 4px solid #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+            color: #ffaaaa;
             margin-bottom: 20px;
             animation: slideDown 0.3s ease;
         }
@@ -237,17 +224,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .demo-box {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            background: linear-gradient(135deg, rgba(50, 50, 50, 0.8) 0%, rgba(30, 30, 30, 0.8) 100%);
             border-radius: 8px;
             padding: 14px;
             margin-top: 24px;
-            border-left: 4px solid #22c55e;
+            border-left: 4px solid #666666;
         }
 
         .demo-box p {
             margin: 0;
             font-size: 13px;
-            color: #15803d;
+            color: #cccccc;
             font-weight: 500;
         }
     </style>
