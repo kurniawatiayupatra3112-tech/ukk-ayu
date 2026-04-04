@@ -12,7 +12,9 @@ if (session_status() === PHP_SESSION_NONE) {
 date_default_timezone_set('Asia/Jakarta');
 
 // Base URL untuk link
-$base_url = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'])), '/\\');
+$script_dir = dirname($_SERVER['SCRIPT_NAME']);
+$base_url = preg_replace('#/app(?:/.*)?$#', '', $script_dir);
+$base_url = rtrim($base_url, '/\\');
 if ($base_url === '') {
     $base_url = '';
 }
