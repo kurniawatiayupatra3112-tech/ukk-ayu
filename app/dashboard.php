@@ -1,6 +1,6 @@
 ﻿<?php
 /**
- * Dashboard
+ * Dashboard - Blue+Pink Soft Theme
  * Clean design with Heroicons
  */
 
@@ -45,9 +45,231 @@ $stmt = $pdo->query("
 $transaksi_terbaru = $stmt->fetchAll();
 ?>
 
+<!-- 💙💖 Blue+Pink Soft Gradient CSS -->
+<style>
+/* ===== BACKGROUND - BLUE+PINK SOFT GRADIENT ===== */
+body {
+    background: linear-gradient(135deg, 
+        #f0f9ff 0%,      /* Soft Blue */
+        #fdf2f8 25%,     /* Soft Pink */
+        #f0f9ff 50%,     /* Soft Blue */
+        #fce7f3 75%,     /* Soft Pink */
+        #f0f9ff 100%     /* Soft Blue */
+    );
+    background-size: 400% 400%;
+    animation: gradientFlow 25s ease infinite;
+    min-height: 100vh;
+    position: relative;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Soft Floating Blobs */
+body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(236, 183, 216, 0.3) 0%, transparent 70%);
+    animation: floatBlob 30s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px;
+    left: -50px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(191, 219, 254, 0.3) 0%, transparent 70%);
+    animation: floatBlob 25s ease-in-out infinite reverse;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes floatBlob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.05); }
+    66% { transform: translate(-20px, 25px) scale(0.95); }
+}
+
+/* ===== CARD STYLING ===== */
+.card, .stat-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(147, 51, 234, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover, .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(147, 51, 234, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    font-weight: 600;
+    color: #1e293b;
+    border-radius: 16px 16px 0 0 !important;
+}
+
+/* ===== STAT CARD ===== */
+.stat-card {
+    padding: 20px;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+}
+
+.stat-icon.primary {
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    color: white;
+}
+
+.stat-icon.success {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+}
+
+.stat-icon.warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 12px rgba(147, 51, 234, 0.06);
+}
+
+.page-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.page-header p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ===== BUTTONS ===== */
+.btn-outline-primary {
+    border-color: #c084fc;
+    color: #7c3aed;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 16px rgba(147, 51, 234, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    border: none;
+    box-shadow: 0 4px 16px rgba(147, 51, 234, 0.2);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
+    box-shadow: 0 6px 24px rgba(147, 51, 234, 0.35);
+}
+
+/* ===== LIST GROUP ===== */
+.list-group-item {
+    border-color: #f1f5f9;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.list-group-item:hover {
+    background: rgba(248, 250, 252, 0.8);
+}
+
+/* ===== BADGES ===== */
+.badge.bg-success {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    body::before,
+    body::after {
+        display: none;
+    }
+    .page-header {
+        padding: 16px 20px;
+    }
+    .stat-card {
+        padding: 16px;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    body,
+    body::before,
+    body::after,
+    .card,
+    .stat-card {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+
 <div class="page-header">
     <h1>Dashboard</h1>
-    <p>Selamat datang, <?= htmlspecialchars($_SESSION['username']) ?>!</p>
+    <p>Selamat datang, <?= htmlspecialchars($_SESSION['username']) ?>! 👋</p>
 </div>
 
 <!-- Statistics Cards -->
@@ -105,7 +327,7 @@ $transaksi_terbaru = $stmt->fetchAll();
 <div class="row g-4">
     <div class="col-lg-8">
         <div class="card h-100">
-            <div class="card-header">Grafik Transaksi 7 Hari Terakhir</div>
+            <div class="card-header">📊 Grafik Transaksi 7 Hari Terakhir</div>
             <div class="card-body">
                 <canvas id="chartTransaksi" height="280"></canvas>
             </div>
@@ -115,7 +337,7 @@ $transaksi_terbaru = $stmt->fetchAll();
     <div class="col-lg-4">
         <div class="card h-100">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span>Transaksi Terbaru</span>
+                <span>🕐 Transaksi Terbaru</span>
                 <a href="<?= $base_url ?>/app/transaksi/riwayat.php" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
             </div>
             <div class="card-body p-0">
@@ -130,12 +352,12 @@ $transaksi_terbaru = $stmt->fetchAll();
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <span class="badge <?= $t['jenis_transaksi'] === 'masuk' ? 'bg-success' : 'bg-danger' ?> me-2">
-                                            <?= $t['jenis_transaksi'] === 'masuk' ? 'Masuk' : 'Keluar' ?>
+                                            <?= $t['jenis_transaksi'] === 'masuk' ? '📥 Masuk' : '📤 Keluar' ?>
                                         </span>
                                         <strong><?= htmlspecialchars($t['nama_barang']) ?></strong>
                                     </div>
                                     <span class="<?= $t['jenis_transaksi'] === 'masuk' ? 'text-success' : 'text-danger' ?> fw-bold">
-                                        <?= $t['jenis_transaksi'] === 'masuk' ? '+' : '-' ?><?= $t['jumlah'] ?>
+                                        <?= $t['jenis_transaksi'] === 'masuk' ? '+' : '-' ?><?= number_format($t['jumlah']) ?>
                                     </span>
                                 </div>
                                 <small class="text-muted">
@@ -154,7 +376,7 @@ $transaksi_terbaru = $stmt->fetchAll();
 <div class="row mt-4">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">Aksi Cepat</div>
+            <div class="card-header">⚡ Aksi Cepat</div>
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-3">
@@ -210,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Jika tidak ada data, tampilkan pesan
     if (chartData.length === 0) {
         document.getElementById('chartTransaksi').parentElement.innerHTML = 
-            '<div class="text-center text-muted py-5">Belum ada data transaksi 7 hari terakhir</div>';
+            '<div class="text-center text-muted py-5">📭 Belum ada data transaksi 7 hari terakhir</div>';
         return;
     }
     
@@ -228,16 +450,18 @@ document.addEventListener('DOMContentLoaded', function() {
             labels: labels,
             datasets: [
                 {
-                    label: 'Barang Masuk',
+                    label: '📥 Barang Masuk',
                     data: masukData,
                     backgroundColor: '#22c55e',
-                    borderRadius: 4
+                    borderRadius: 6,
+                    borderSkipped: false
                 },
                 {
-                    label: 'Barang Keluar',
+                    label: '📤 Barang Keluar',
                     data: keluarData,
                     backgroundColor: '#ef4444',
-                    borderRadius: 4
+                    borderRadius: 6,
+                    borderSkipped: false
                 }
             ]
         },
@@ -245,11 +469,24 @@ document.addEventListener('DOMContentLoaded', function() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { position: 'top' }
+                legend: { 
+                    position: 'top',
+                    labels: {
+                        font: { family: 'Inter', size: 12 },
+                        color: '#475569'
+                    }
+                }
             },
             scales: {
-                x: { grid: { display: false } },
-                y: { beginAtZero: true, grid: { color: '#e2e8f0' } }
+                x: { 
+                    grid: { display: false },
+                    ticks: { color: '#64748b', font: { size: 11 } }
+                },
+                y: { 
+                    beginAtZero: true, 
+                    grid: { color: '#e2e8f0' },
+                    ticks: { color: '#64748b', font: { size: 11 } }
+                }
             }
         }
     });

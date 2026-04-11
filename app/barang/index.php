@@ -1,6 +1,7 @@
 <?php
 /**
  * Data Barang - List dengan Search, Pagination, dan Export
+ * Soft Blue Theme
  */
 
 $page_title = 'Data Barang';
@@ -24,12 +25,352 @@ foreach ($data_barang as $b) {
 }
 ?>
 
+<!-- 💙 Soft Blue Theme CSS -->
+<style>
+/* ===== BACKGROUND - SOFT BLUE ===== */
+body {
+    background: #eff6ff !important; /* Soft Sky Blue */
+    min-height: 100vh;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 20px 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 2px 12px rgba(59, 130, 246, 0.06);
+}
+
+.page-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin-bottom: 4px;
+}
+
+.page-header p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ===== CARD STYLING ===== */
+.card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08), 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12), 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
+    font-weight: 600;
+    color: #1e293b;
+    border-radius: 16px 16px 0 0 !important;
+    padding: 16px 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* ===== STAT CARD ===== */
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08), 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12), 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+}
+
+.stat-icon.primary {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    color: white;
+}
+
+.stat-icon.success {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+}
+
+.stat-icon.warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* ===== TABLE STYLING ===== */
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid #e2e8f0;
+    color: #334155;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    padding: 14px 16px;
+}
+
+.table tbody td {
+    border-color: #f1f5f9;
+    color: #334155;
+    font-size: 14px;
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: rgba(240, 249, 255, 0.6);
+}
+
+/* ===== BADGES ===== */
+.badge.bg-success {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: white;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    border-color: #93c5fd;
+    color: #2563eb;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-outline-primary:hover {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.btn-outline-danger {
+    border-color: #fca5a5;
+    color: #dc2626;
+    border-radius: 10px 0 0 10px;
+    padding: 10px 14px;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-outline-danger:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: white;
+}
+
+.btn-outline-success {
+    border-color: #86efac;
+    color: #16a34a;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-left: none;
+}
+
+.btn-outline-success:hover {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 6px 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 6px 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-1px);
+}
+
+/* ===== DATATABLES OVERRIDES ===== */
+.dataTables_wrapper .dataTables_filter input {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #334155;
+    transition: all 0.2s ease;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.15);
+    outline: none;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #334155;
+    background: #ffffff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 8px !important;
+    margin: 0 3px;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #334155 !important;
+    transition: all 0.2s ease;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #eff6ff !important;
+    border-color: #93c5fd !important;
+    color: #2563eb !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.dataTables_wrapper .dataTables_info {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px 20px;
+    }
+    
+    .page-header h1 {
+        font-size: 20px;
+    }
+    
+    .stat-card {
+        padding: 16px;
+    }
+    
+    .card-body {
+        padding: 16px;
+    }
+}
+</style>
+
 <div class="page-header d-flex justify-content-between align-items-start">
     <div>
-        <h1>Data Barang</h1>
+        <h1>📦 Data Barang</h1>
         <p>Kelola semua data barang di gudang</p>
     </div>
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2 flex-wrap">
         <div class="btn-group">
             <a href="export_pdf.php" class="btn btn-outline-danger" target="_blank" title="Export PDF">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16">
@@ -102,81 +443,47 @@ foreach ($data_barang as $b) {
                         <th>Satuan</th>
                         <th width="12%">Stok</th>
                         <th width="18%">Harga</th>
-                        <!-- <th width="18%">Status</th> -->
                         <th width="15%">Terakhir Update</th>
                         <th width="12%">Aksi</th>
                     </tr>
                 </thead>
-             <tbody>
-<?php $no = 1; foreach ($data_barang as $barang): ?>
-<tr>
-    <td><?= $no++ ?></td>
-
-    <td>
-        <strong><?= htmlspecialchars($barang['nama_barang']) ?></strong>
-    </td>
-
-    <!-- KATEGORI -->
-    <td>
-        <?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?>
-    </td>
-
-    <!-- SATUAN -->
-    <td>
-        <?= htmlspecialchars($barang['satuan']) ?>
-    </td>
-
-    <!-- STOK -->
-    <td>
-        <?php
-            $stok = (int)$barang['stok'];
-            if ($stok > 10) {
-                $badge = 'success';
-            } elseif ($stok > 0) {
-                $badge = 'warning';
-            } else {
-                $badge = 'danger';
-            }
-        ?>
-        <span class="badge bg-<?= $badge ?>">
-            <?= $stok ?>
-        </span>
-    </td>
-
-    <!-- HARGA -->
-    <td>
-        Rp <?= number_format($barang['harga'], 2, ',', '.') ?>
-    </td>
-
-    <!-- STATUS -->
-    <!-- <td>
-        <?= htmlspecialchars($barang['status']) ?>
-    </td> -->
-
-    <!-- UPDATE -->
-    <td>
-        <small class="text-muted">
-            <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
-        </small>
-    </td>
-
-    <!-- AKSI -->
-    <td>
-        <div class="btn-group">
-            <a href="edit.php?id=<?= $barang['id'] ?>" class="btn btn-sm btn-warning">
-                Edit
-            </a>
-            <button
-                onclick="hapusBarang(<?= $barang['id'] ?>, '<?= htmlspecialchars($barang['nama_barang'], ENT_QUOTES) ?>')"
-                class="btn btn-sm btn-danger">
-                Hapus
-            </button>
-        </div>
-    </td>
-</tr>
-<?php endforeach; ?>
-</tbody>
-
+                <tbody>
+                    <?php $no = 1; foreach ($data_barang as $barang): ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><strong><?= htmlspecialchars($barang['nama_barang']) ?></strong></td>
+                        <td><?= htmlspecialchars($barang['nama_kategori'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars($barang['satuan']) ?></td>
+                        <td>
+                            <?php
+                                $stok = (int)$barang['stok'];
+                                if ($stok > 10) {
+                                    $badge = 'success';
+                                } elseif ($stok > 0) {
+                                    $badge = 'warning';
+                                } else {
+                                    $badge = 'danger';
+                                }
+                            ?>
+                            <span class="badge bg-<?= $badge ?>">
+                                <?= $stok ?>
+                            </span>
+                        </td>
+                        <td>Rp <?= number_format($barang['harga'], 2, ',', '.') ?></td>
+                        <td>
+                            <small class="text-muted">
+                                <?= date('d/m/Y H:i', strtotime($barang['updated_at'])) ?>
+                            </small>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="edit.php?id=<?= $barang['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                                <button onclick="hapusBarang(<?= $barang['id'] ?>, '<?= htmlspecialchars($barang['nama_barang'], ENT_QUOTES) ?>')" class="btn btn-sm btn-danger">Hapus</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>
@@ -190,19 +497,19 @@ $(document).ready(function() {
     $('#tabelBarang').DataTable({
         language: {
             url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
-            search: "Cari:",
+            search: "🔍 Cari:",
             lengthMenu: "Tampilkan _MENU_ data",
             info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
             paginate: {
-                first: "Pertama",
-                last: "Terakhir",
-                next: "Selanjutnya",
-                previous: "Sebelumnya"
+                first: "⏮ Pertama",
+                last: "Terakhir ⏭",
+                next: "Selanjutnya →",
+                previous: "← Sebelumnya"
             }
         },
         order: [[0, 'asc']],
         pageLength: 10,
-        lengthMenu: [[5, 10, 25], [5, 10, 25]],
+        lengthMenu: [[5, 10, 25, 50], [5, 10, 25, 50]],
         searching: true,
         paging: true,
         info: true
@@ -212,13 +519,18 @@ $(document).ready(function() {
 function hapusBarang(id, nama) {
     Swal.fire({
         title: 'Hapus Barang?',
-        html: `Yakin ingin menghapus <strong>${nama}</strong>?`,
+        html: `Yakin ingin menghapus <strong>${nama}</strong>?<br><small class="text-muted">Data yang dihapus tidak dapat dikembalikan</small>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#ef4444',
         cancelButtonColor: '#64748b',
         confirmButtonText: 'Ya, Hapus!',
-        cancelButtonText: 'Batal'
+        cancelButtonText: 'Batal',
+        customClass: {
+            popup: 'rounded-4',
+            confirmButton: 'rounded-3',
+            cancelButton: 'rounded-3'
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             window.location.href = 'hapus.php?id=' + id;
